@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleWebchat.DAL", "SimpleWebchat.DAL\SimpleWebchat.DAL.csproj", "{1A1ED3D2-BBD2-40AF-8005-B3F3A7F0956E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleWebchat.BLL", "SimpleWebchat.BLL\SimpleWebchat.BLL.csproj", "{4BD81AB3-EDC8-4650-ADA4-7C51484623CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleWebchat.Web", "SimpleWebchat.Web\SimpleWebchat.Web.csproj", "{28067F70-B5F7-4A00-8AAE-1F6BB99A58DE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1A1ED3D2-BBD2-40AF-8005-B3F3A7F0956E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A1ED3D2-BBD2-40AF-8005-B3F3A7F0956E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A1ED3D2-BBD2-40AF-8005-B3F3A7F0956E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A1ED3D2-BBD2-40AF-8005-B3F3A7F0956E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BD81AB3-EDC8-4650-ADA4-7C51484623CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BD81AB3-EDC8-4650-ADA4-7C51484623CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BD81AB3-EDC8-4650-ADA4-7C51484623CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BD81AB3-EDC8-4650-ADA4-7C51484623CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28067F70-B5F7-4A00-8AAE-1F6BB99A58DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28067F70-B5F7-4A00-8AAE-1F6BB99A58DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28067F70-B5F7-4A00-8AAE-1F6BB99A58DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28067F70-B5F7-4A00-8AAE-1F6BB99A58DE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

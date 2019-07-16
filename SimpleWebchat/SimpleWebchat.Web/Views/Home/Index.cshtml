@@ -1,0 +1,82 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style>
+        .other {
+            color: blue;
+        }
+
+        .caller {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <table>
+        <tr>
+            <td><label>Kullanıcı Adı: </label></td>
+            <td><input type="text" id="kullaniciAdi" /></td>
+        </tr>
+        <tr>
+            <td><label>Şifre: </label></td>
+            <td><input type="password" id="sifre" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td rowspan="2"><button id="btnLogin">Giriş</button></td>
+        </tr>
+    </table>
+
+    <br />
+    <hr />
+    <h1><strong>Hoş Geldiniz</strong></h1>
+    <textarea id="txtMessage" rows="5"></textarea>
+    <br />
+    <button id="btnSend">Mesaj Gönder</button>
+    <hr />
+    <ul id="chatList"></ul>
+
+    <script src="~/scripts/jquery-1.6.4.js"></script>
+    <script src="~/scripts/jquery.signalR-2.4.1.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script>
+        $(document).ready(function () {
+            var name = prompt("Kullanıcı Adınızı Giriniz");
+            $("#kullaniciAdi").val(name);
+            //Kullanıcı adı alındı.
+            var pass = prompt("Şifrenizi Giriniz");
+            $("#sifre").val(pass);
+
+            $.connection.hub.start();
+            var chat = $.connection.messagesHub;
+            //Hub başlatıldı.
+
+            chat.client.getMessageOther = function (name, message) {
+                $("#chatList").append("<li class='other'><strong>" + name + ":</strong> " + message + "</li>");
+            };
+
+            chat.client.getMessageCaller = function (message) {
+                $("#chatList").append("<li class='caller'>" + message + "</li>");
+            };
+
+
+            $("#btnSend").click(function () {
+                var message = $("#txtMessage").val();
+                chat.server.sendMessage(name, message);
+                $("#txtMessage").val(""); //Mesaj gönderildikten sonra TextBox temizlendi.
+            });
+            //Butona basıldığında txtMessage içeriğindeki ileti sunucuda SendMessage fonksiyonunda çalıştırıldı.
+        });
+    </script>
+
+</body>
+</html>
