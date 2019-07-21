@@ -19,7 +19,7 @@ namespace SimpleWebchat.DAL.Entities
         [Column("UserID")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserID { get; set; }
-        [Column("Username")]
+        [Column("UserVariance")]
         [MaxLength(50)]
         public string UserVariance { get; set; }
         [Required]

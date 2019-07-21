@@ -30,6 +30,18 @@ namespace SimpleWebchat.Web.Models
                     if (connection.State == ConnectionState.Closed)
                         connection.Open();
 
+                    /*
+                    // Aşağıdaki kodlara alternatif ve sonucu direk return ediyor.
+                    using (var reader = command.ExecuteReader())
+                        return reader.Cast<IDataRecord>()
+                            .Select(x => new Messages()
+                            {
+                                MessageID = x.GetInt32(0),
+                                UserID = x.GetInt32(1),
+                                MessageText = x.GetString(2)
+                            }).ToList();
+                    */
+
                     var reader = command.ExecuteReader();
 
                     while (reader.Read())

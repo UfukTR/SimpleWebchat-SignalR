@@ -19,6 +19,9 @@ namespace SimpleWebchat.Web
 
             //Uygulama Başladığında SQL Dependency Çalışır
             SqlDependency.Start(connString);
+
+            UnityConfig.RegisterComponents();
+
         }
         protected void Application_End()
         {

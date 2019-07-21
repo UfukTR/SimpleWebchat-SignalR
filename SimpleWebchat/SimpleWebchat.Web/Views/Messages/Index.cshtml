@@ -1,0 +1,39 @@
+﻿@model IEnumerable<SimpleWebchat.DAL.Entities.Message>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MessageText)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MessageText)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MessageID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MessageID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MessageID })
+        </td>
+    </tr>
+}
+
+</table>

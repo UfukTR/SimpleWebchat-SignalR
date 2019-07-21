@@ -1,0 +1,164 @@
+﻿@model List<SimpleWebchat.BLL.ViewModels.UserViewmodel>
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+<style>
+    .pt-3-half {
+padding-top: 1.4rem;
+}
+</style>
+<!-- Editable table -->
+<div class="card">
+    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Editable table</h3>
+    <div class="card-body">
+        <div id="table" class="table-editable">
+            <span class="table-add float-right mb-3 mr-2">
+                <a href="#!" class="text-success">
+                    <i class="fas fa-plus fa-2x" aria-hidden="true"></i>
+                </a>
+            </span>
+            <table class="table table-bordered table-responsive-md table-striped text-center">
+                <thead>
+                    <tr>
+                        <th class="text-center">UserID</th>
+                        <th class="text-center">UserVariance</th>
+                        <th class="text-center">Username</th>
+                        <th class="text-center">Password</th>
+                        <th class="text-center">Email</th>
+                        <th class="text-center">Sort</th>
+                        <th class="text-center">Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="pt-3-half" contenteditable="true">@item.UserID</td>
+                            <td class="pt-3-half" contenteditable="true">@item.UserVariance</td>
+                            <td class="pt-3-half" contenteditable="true">@item.Username</td>
+                            <td class="pt-3-half" contenteditable="true">@item.Password</td>
+                            <td class="pt-3-half" contenteditable="true">@item.Email</td>
+                            <td class="pt-3-half">
+                                <span class="table-up">
+                                    <a href="#!" class="indigo-text">
+                                        <i class="fas fa-long-arrow-alt-up"
+                                           aria-hidden="true"></i>
+                                    </a>
+                                </span>
+                                <span class="table-down">
+                                    <a href="#!" class="indigo-text">
+                                        <i class="fas fa-long-arrow-alt-down"
+                                           aria-hidden="true"></i>
+                                    </a>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="table-remove">
+                                    <button type="button"
+                                            class="btn btn-danger btn-rounded btn-sm my-0">
+                                        Remove
+                                    </button>
+                                </span>
+                            </td>
+                        </tr>
+                    }
+                   
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Editable table -->
+    <script>
+  const $tableID = $('#table');
+  const $BTN = $('#export-btn');
+  const $EXPORT = $('#export');
+
+  const newTr = `
+ <tr class="hide">
+   <td class="pt-3-half" contenteditable="true">Example</td>
+   <td class="pt-3-half" contenteditable="true">Example</td>
+   <td class="pt-3-half" contenteditable="true">Example</td>
+   <td class="pt-3-half" contenteditable="true">Example</td>
+   <td class="pt-3-half" contenteditable="true">Example</td>
+   <td class="pt-3-half">
+     <span class="table-up"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i></a></span>
+     <span class="table-down"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i></a></span>
+   </td>
+   <td>
+     <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0 waves-effect waves-light">Remove</button></span>
+   </td>
+ </tr>`;
+
+  $('.table-add').on('click', 'i', () => {
+
+    const $clone = $tableID.find('tbody tr').last().clone(true).removeClass('hide table-line');
+
+    if ($tableID.find('tbody tr').length === 0) {
+
+      $('tbody').append(newTr);
+    }
+
+    $tableID.find('table').append($clone);
+  });
+
+  $tableID.on('click', '.table-remove', function () {
+
+    $(this).parents('tr').detach();
+  });
+
+  $tableID.on('click', '.table-up', function () {
+
+    const $row = $(this).parents('tr');
+
+    if ($row.index() === 1) {
+      return;
+    }
+
+    $row.prev().before($row.get(0));
+  });
+
+  $tableID.on('click', '.table-down', function () {
+
+    const $row = $(this).parents('tr');
+    $row.next().after($row.get(0));
+  });
+
+  // A few jQuery helpers for exporting only
+  jQuery.fn.pop = [].pop;
+  jQuery.fn.shift = [].shift;
+
+  $BTN.on('click', () => {
+
+    const $rows = $tableID.find('tr:not(:hidden)');
+    const headers = [];
+    const data = [];
+
+    // Get the headers (add special header logic here)
+    $($rows.shift()).find('th:not(:empty)').each(function () {
+
+      headers.push($(this).text().toLowerCase());
+    });
+
+    // Turn all existing rows into a loopable array
+    $rows.each(function () {
+      const $td = $(this).find('td');
+      const h = {};
+
+      // Use the headers from earlier to name our hash keys
+      headers.forEach((header, i) => {
+
+        h[header] = $td.eq(i).text();
+      });
+
+      data.push(h);
+    });
+
+    // Output the result
+    $EXPORT.text(JSON.stringify(data));
+  });
+</script>
+
+

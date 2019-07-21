@@ -51,6 +51,12 @@
   <ItemGroup>
     <Compile Include="Business.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\IMessageService.cs" />
+    <Compile Include="Service\IUserService.cs" />
+    <Compile Include="Service\MessageService.cs" />
+    <Compile Include="Service\UserService.cs" />
+    <Compile Include="ViewModels\MessageViewmodel.cs" />
+    <Compile Include="ViewModels\UserViewmodel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimpleWebchat.DAL\SimpleWebchat.DAL.csproj">
@@ -62,6 +68,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
