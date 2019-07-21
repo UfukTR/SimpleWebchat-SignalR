@@ -36,21 +36,21 @@ namespace SimpleWebchat.DAL.Repository
         public TEntity Insert(TEntity entity)
         {
             Context.Set<TEntity>().Add(entity);
-            SaveChanges();
+            Context.SaveChanges();
 
             return entity;
         }
         public TEntity Update(TEntity entity)
         {
             Context.Entry(entity).State = EntityState.Modified;
-            SaveChanges();
+            Context.SaveChanges();
 
             return entity;
         }
         public void Delete(TEntity entity)
         {
             Context.Set<TEntity>().Remove(entity);
-            SaveChanges();
+            Context.SaveChanges();
         }
         public void Delete(Expression<Func<TEntity, bool>> predicate)
         {
@@ -59,43 +59,12 @@ namespace SimpleWebchat.DAL.Repository
             foreach (var entityItem in tempEntityList)
                 Context.Set<TEntity>().Remove(entityItem);
 
-            SaveChanges();
+            Context.SaveChanges();
         }
         public TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate)
         {
             return Context.Set<TEntity>().FirstOrDefault(predicate);
         }
-        private bool SaveChanges()
-        {
-            try
-            {
-                Context.SaveChanges();
-            }
-            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
-            {
-                Exception raise = dbEx;
-
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        string message = string.Format("{0}:{1}",
-                            validationErrors.Entry.Entity.ToString(),
-                            validationError.ErrorMessage);
-                        // raise a new exception nesting
-                        // the current instance as InnerException
-                        raise = new InvalidOperationException(message, raise);
-                    }
-                }
-
-                throw raise;
-            }
-            catch (Exception)
-            {
-
-            }
-
-            return true;
-        }
+        
     }
 }
